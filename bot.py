@@ -86,7 +86,12 @@ def got_message(message):
             db += message.split(CHANNEL + " :")[1]
             db += " "
             open('db.txt', 'w').write(db)
-     
+    elif words[1] == 'PRIVMSG' and words[2] == CHANNEL and 'hello'.lower() in words[3].lower() and connected:
+        # Someone probably said `hello`.
+        s.sendall("PRIVMSG %s :"%(CHANNEL) + "Greetings, fellow. Welcome to Gunn High School IRC." + "\r\n")
+    elif words[1] == 'PRIVMSG' and words[2] == CHANNEL and ':ls'.lower() == words[3].lower().lower() and connected:
+        # Someone probably said `ls`.
+        s.sendall("PRIVMSG %s :"%(CHANNEL) + "WARNING! ALERT! UNIX USER ALERT! ALERT! WARNING! ALERT!" + "\r\n")     
             if (random.choice(list(range(0,10))) == 1):
                 s.sendall("PRIVMSG %s :"%(CHANNEL) + random.choice(["!moose", "!joke"]) + "\r\n")           
 
